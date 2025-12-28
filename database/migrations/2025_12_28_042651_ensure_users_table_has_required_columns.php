@@ -11,23 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Solo crear users si no existe
-        if (!Schema::hasTable('users')) {
-            Schema::create('users', function (Blueprint $table) {
-                $table->id();
-                $table->string('name');
-                $table->string('email')->unique();
-                $table->timestamp('email_verified_at')->nullable();
-                $table->string('password');
-                $table->rememberToken();
-                $table->timestamps();
-            });
-        } else {
-            // Si la tabla existe, solo agregar la columna faltante
+        // Agregar email_verified_at a users si no existe
+        if (Schema::hasTable('users') && !Schema::hasColumn('users', 'email_verified_at')) {
             Schema::table('users', function (Blueprint $table) {
-                if (!Schema::hasColumn('users', 'email_verified_at')) {
-                    $table->timestamp('email_verified_at')->nullable()->after('email');
-                }
+                $table->timestamp('email_verified_at')->nullable()->after('email');
             });
         }
 
@@ -58,8 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        // No revertir para mantener compatibilidad con datos existentes
     }
 };

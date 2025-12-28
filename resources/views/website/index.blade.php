@@ -8,6 +8,7 @@
     </div>
 
     <div class="row text-left thumbs" id="sortable">
+        @foreach($archives as $archive)
         <div class="col-md-4 col-sm-6" data-archive="1">
             <div class="media">
                 <div class="media-left">
@@ -22,5 +23,6 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </x-website-layout>
