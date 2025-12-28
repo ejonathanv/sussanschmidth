@@ -9,7 +9,6 @@ class WebsiteController extends Controller
 {
     public function index(){
         $archives = Archive::all();
-        dd($archives);
         return view('website.index', compact('archives'));
     }
 }
