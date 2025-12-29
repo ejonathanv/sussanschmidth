@@ -6,18 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Sidebar extends Component
+class AdminLayout extends Component
 {
-
-    public $isWebsite;
-    public $isAdmin;
     /**
      * Create a new component instance.
      */
-    public function __construct($isWebsite = true, $isAdmin = false)
+    public function __construct()
     {
-        $this->isWebsite = $isAdmin ? false : $isWebsite;
-        $this->isAdmin = $isAdmin ? true : false;
+        //
     }
 
     /**
@@ -25,6 +21,6 @@ class Sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sidebar');
+        return view('layouts.admin-layout');
     }
 }
