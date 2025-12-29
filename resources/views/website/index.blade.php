@@ -1,28 +1,35 @@
-<x-website-layout>
+<x-website-layout description="{{ $startYear }} - {{ $endYear }}">
     <div class="admin-header text-left">
         <div class="row">
             <div class="col-sm-6">
-                <h2 icon-title>Art Work</h2>
+                <h2 icon-title>{{ $startYear }} - {{ $endYear }}</h2>
             </div>
         </div>
     </div>
 
     <div class="row text-left thumbs" id="sortable">
-        @foreach($archives as $archive)
-        <div class="col-md-4 col-sm-6" data-archive="1">
+        @forelse($archives as $archive)
+        <div class="col-md-4 col-sm-6" data-archive="{{ $archive->id }}">
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <figure style="background-image: url('https://placehold.co/1600x900')"></figure>
+                        @php
+                            $imageUrl = $archive->image ?: 'https://placehold.co/1600x900';
+                        @endphp
+                        <figure style="background-image: url('{{ $imageUrl }}')"></figure>
                     </a>
                 </div>
                 <div class="media-body">
                     <a href="#">
-                        <h4>THIS IS A TEST</h4>
+                        <h4>{{ $archive->title }}</h4>
                     </a>
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12">
+            <p>No se encontraron obras de arte para este rango de años.</p>
+        </div>
+        @endforelse
     </div>
 </x-website-layout>
