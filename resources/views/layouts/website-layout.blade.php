@@ -20,5 +20,6 @@
             {{ $slot }}
         </section>
         <x-footer />
+        @stack('scripts')
     </body>
 </html>

@@ -58,4 +58,44 @@ class WebsiteController extends Controller
         }
         return view('website.article', compact('article', 'articles'));
     }
+
+    public function archive($startYear, $endYear, $slug){
+        $archive = Archive::where('slug', $slug)->first();
+        if (!$archive) {
+            abort(404);
+        }
+
+        // Verificar que el archivo esté dentro del rango de años
+        $archiveYear = (int) $archive->year;
+        if ($archiveYear < $startYear || $archiveYear > $endYear) {
+            abort(404);
+        }
+
+        // Obtener el siguiente y anterior archivo dentro del rango de años
+        $next = Archive::whereRaw('CAST(year AS UNSIGNED) BETWEEN ? AND ?', [$startYear, $endYear])
+            ->where(function($query) use ($archive) {
+                $query->where('year', '>', $archive->year)
+                      ->orWhere(function($q) use ($archive) {
+                          $q->where('year', '=', $archive->year)
+                            ->where('id', '>', $archive->id);
+                      });
+            })
+            ->orderBy('year', 'asc')
+            ->orderBy('id', 'asc')
+            ->first();
+
+        $prev = Archive::whereRaw('CAST(year AS UNSIGNED) BETWEEN ? AND ?', [$startYear, $endYear])
+            ->where(function($query) use ($archive) {
+                $query->where('year', '<', $archive->year)
+                      ->orWhere(function($q) use ($archive) {
+                          $q->where('year', '=', $archive->year)
+                            ->where('id', '<', $archive->id);
+                      });
+            })
+            ->orderBy('year', 'desc')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return view('website.archive', compact('archive', 'next', 'prev', 'startYear', 'endYear'));
+    }
 }

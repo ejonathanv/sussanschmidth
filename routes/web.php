@@ -11,6 +11,11 @@ Route::get('/work/{startYear}-{endYear}', [WebsiteController::class, 'archivesBy
     ->where(['startYear' => '[0-9]+', 'endYear' => '[0-9]+'])
     ->name('work.year-range');
 
+// Ruta de archivo individual
+Route::get('/work/{startYear}-{endYear}/archive/{slug}', [WebsiteController::class, 'archive'])
+    ->where(['startYear' => '[0-9]+', 'endYear' => '[0-9]+'])
+    ->name('archive');
+
 // Ruta de biografía
 Route::get('/susan-schmidt', [WebsiteController::class, 'biography'])->name('biography');
 // Rutas de exhibiciones

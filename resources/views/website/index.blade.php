@@ -12,7 +12,7 @@
         <div class="col-md-4 col-sm-6" data-archive="{{ $archive->id }}">
             <div class="media">
                 <div class="media-left">
-                    <a href="#">
+                    <a href="{{ route('archive', [$startYear, $endYear, $archive->slug]) }}">
                         @php
                             $imageUrl = $archive->image ?: 'https://placehold.co/1600x900';
                         @endphp
@@ -20,7 +20,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <a href="#">
+                    <a href="{{ route('archive', [$startYear, $endYear, $archive->slug]) }}">
                         <h4>{{ $archive->title }}</h4>
                     </a>
                 </div>
