@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Archive;
 use App\Models\Article;
+use App\Models\Exhibition;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -33,7 +34,15 @@ class WebsiteController extends Controller
     }
 
     public function exhibitions(){
-        return view('website.exhibitions');
+        $solo_exhibitions = Exhibition::where('category', 'solo')
+            ->orderBy('year', 'desc')
+            ->get();
+        
+        $group_exhibitions = Exhibition::where('category', 'group')
+            ->orderBy('year', 'desc')
+            ->get();
+        
+        return view('website.exhibitions', compact('solo_exhibitions', 'group_exhibitions'));
     }
 
     public function articles(){
