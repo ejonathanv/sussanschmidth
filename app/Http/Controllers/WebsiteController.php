@@ -5,63 +5,73 @@ namespace App\Http\Controllers;
 use App\Models\Archive;
 use App\Models\Article;
 use App\Models\Exhibition;
-use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
-    public function index($startYear = null, $endYear = null){
+    public function index($startYear = null, $endYear = null)
+    {
         if ($startYear === null || $endYear === null) {
             $startYear = 2014;
             $endYear = (int) now()->format('Y');
         }
-        
+
         $archives = $this->getArchivesByYearRange($startYear, $endYear);
+
         return view('website.index', compact('archives', 'startYear', 'endYear'));
     }
 
-    public function archivesByYearRange($startYear, $endYear){
+    public function archivesByYearRange($startYear, $endYear)
+    {
         return $this->index($startYear, $endYear);
     }
 
-    private function getArchivesByYearRange($startYear, $endYear){
+    private function getArchivesByYearRange($startYear, $endYear)
+    {
         return Archive::whereRaw('CAST(year AS UNSIGNED) BETWEEN ? AND ?', [$startYear, $endYear])
             ->orderByRaw('CAST(year AS UNSIGNED) DESC')
             ->get();
     }
 
-    public function biography(){
+    public function biography()
+    {
         return view('website.biography');
     }
 
-    public function exhibitions(){
+    public function exhibitions()
+    {
         $solo_exhibitions = Exhibition::where('category', 'solo')
             ->orderBy('year', 'desc')
             ->get();
-        
+
         $group_exhibitions = Exhibition::where('category', 'group')
             ->orderBy('year', 'desc')
             ->get();
-        
+
         return view('website.exhibitions', compact('solo_exhibitions', 'group_exhibitions'));
     }
 
-    public function articles(){
+    public function articles()
+    {
         $articles = Article::orderBy('date', 'desc')->get();
+
         return view('website.articles', compact('articles'));
     }
 
-    public function article($slug){
+    public function article($slug)
+    {
         $article = Article::where('slug', $slug)->first();
         $articles = Article::where('slug', '!=', $slug)->orderBy('date', 'desc')->get();
-        if (!$article) {
+        if (! $article) {
             abort(404);
         }
+
         return view('website.article', compact('article', 'articles'));
     }
 
-    public function archive($startYear, $endYear, $slug){
+    public function archive($startYear, $endYear, $slug)
+    {
         $archive = Archive::where('slug', $slug)->first();
-        if (!$archive) {
+        if (! $archive) {
             abort(404);
         }
 
@@ -73,29 +83,82 @@ class WebsiteController extends Controller
 
         // Obtener el siguiente y anterior archivo dentro del rango de años
         $next = Archive::whereRaw('CAST(year AS UNSIGNED) BETWEEN ? AND ?', [$startYear, $endYear])
-            ->where(function($query) use ($archive) {
+            ->where(function ($query) use ($archive) {
                 $query->where('year', '>', $archive->year)
-                      ->orWhere(function($q) use ($archive) {
-                          $q->where('year', '=', $archive->year)
+                    ->orWhere(function ($q) use ($archive) {
+                        $q->where('year', '=', $archive->year)
                             ->where('id', '>', $archive->id);
-                      });
+                    });
             })
             ->orderBy('year', 'asc')
             ->orderBy('id', 'asc')
             ->first();
 
         $prev = Archive::whereRaw('CAST(year AS UNSIGNED) BETWEEN ? AND ?', [$startYear, $endYear])
-            ->where(function($query) use ($archive) {
+            ->where(function ($query) use ($archive) {
                 $query->where('year', '<', $archive->year)
-                      ->orWhere(function($q) use ($archive) {
-                          $q->where('year', '=', $archive->year)
+                    ->orWhere(function ($q) use ($archive) {
+                        $q->where('year', '=', $archive->year)
                             ->where('id', '<', $archive->id);
-                      });
+                    });
             })
             ->orderBy('year', 'desc')
             ->orderBy('id', 'desc')
             ->first();
 
         return view('website.archive', compact('archive', 'next', 'prev', 'startYear', 'endYear'));
+    }
+
+    public function smallFormats()
+    {
+        $smallFormats = \App\Models\SmallFormat::orderBy('year', 'desc')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('website.small-formats', compact('smallFormats'));
+    }
+
+    public function smallFormat($slug)
+    {
+        $smallFormat = \App\Models\SmallFormat::where('slug', $slug)->first();
+        if (! $smallFormat) {
+            abort(404);
+        }
+
+        // Obtener el siguiente y anterior small format
+        $next = \App\Models\SmallFormat::where(function ($query) use ($smallFormat) {
+            $query->where('year', '>', $smallFormat->year)
+                ->orWhere(function ($q) use ($smallFormat) {
+                    $q->where('year', '=', $smallFormat->year)
+                        ->where('id', '>', $smallFormat->id);
+                });
+        })
+            ->orderBy('year', 'asc')
+            ->orderBy('id', 'asc')
+            ->first();
+
+        $prev = \App\Models\SmallFormat::where(function ($query) use ($smallFormat) {
+            $query->where('year', '<', $smallFormat->year)
+                ->orWhere(function ($q) use ($smallFormat) {
+                    $q->where('year', '=', $smallFormat->year)
+                        ->where('id', '<', $smallFormat->id);
+                });
+        })
+            ->orderBy('year', 'desc')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $prev = \App\Models\SmallFormat::where(function ($query) use ($smallFormat) {
+            $query->where('year', '<', $smallFormat->year)
+                ->orWhere(function ($q) use ($smallFormat) {
+                    $q->where('year', '=', $smallFormat->year)
+                        ->where('id', '<', $smallFormat->id);
+                });
+        })
+            ->orderBy('year', 'desc')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return view('website.small-format', compact('smallFormat', 'next', 'prev'));
     }
 }

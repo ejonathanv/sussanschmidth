@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SmallFormatController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,10 @@ Route::get('/work/{startYear}-{endYear}', [WebsiteController::class, 'archivesBy
 Route::get('/work/{startYear}-{endYear}/archive/{slug}', [WebsiteController::class, 'archive'])
     ->where(['startYear' => '[0-9]+', 'endYear' => '[0-9]+'])
     ->name('archive');
+
+// Rutas para Small Formats (público)
+Route::get('/small-format', [WebsiteController::class, 'smallFormats'])->name('small-formats');
+Route::get('/small-format/{slug}', [WebsiteController::class, 'smallFormat'])->name('small-format');
 
 // Ruta de biografía
 Route::get('/susan-schmidt', [WebsiteController::class, 'biography'])->name('biography');
@@ -36,6 +41,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/archives/{archive}/edit', [ArchiveController::class, 'edit'])->name('archives.edit');
     Route::patch('/archives/{archive}', [ArchiveController::class, 'update'])->name('archives.update');
     Route::delete('/archives/{archive}', [ArchiveController::class, 'destroy'])->name('archives.destroy');
+
+    // CRUD Small Formats
+    Route::get('/small-formats', [SmallFormatController::class, 'index'])->name('small-formats.index');
+    Route::get('/small-formats/create', [SmallFormatController::class, 'create'])->name('small-formats.create');
+    Route::post('/small-formats', [SmallFormatController::class, 'store'])->name('small-formats.store');
+    Route::get('/small-formats/{smallFormat}/edit', [SmallFormatController::class, 'edit'])->name('small-formats.edit');
+    Route::patch('/small-formats/{smallFormat}', [SmallFormatController::class, 'update'])->name('small-formats.update');
+    Route::delete('/small-formats/{smallFormat}', [SmallFormatController::class, 'destroy'])->name('small-formats.destroy');
 });
 
 Route::middleware('auth')->group(function () {

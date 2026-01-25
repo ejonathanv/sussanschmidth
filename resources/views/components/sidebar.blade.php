@@ -23,6 +23,7 @@
                         <li><a href="{{ route('work.year-range', ['startYear' => 1990, 'endYear' => 2001]) }}">1990 - 2001</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ route('small-formats') }}">Small Format</a></li>
                 <li><a href="{{ route('biography') }}">Biography</a></li>
                 <li><a href="{{ route('exhibitions') }}">Exhibitions</a></li>
                 <li><a href="{{ route('articles') }}">Articles</a></li>
@@ -32,6 +33,7 @@
         @if($isAdmin)
             <ul>
                 <li><a href="{{ route('dashboard') }}">Archives <i class="ion-ios-folder-outline"></i></a></li>
+                <li><a href="{{ route('small-formats.index') }}">Small Format <i class="ion-ios-briefcase-outline"></i></a></li>
                 <li><a href="#">Exhibitions <i class="ion-ios-calendar-outline"></i></a></li>
                 <li><a href="#">Articles <i class="ion-ios-paper-outline"></i></a></li>
             </ul>
