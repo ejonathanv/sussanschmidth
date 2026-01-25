@@ -46,11 +46,8 @@
             </div>
 
             <div class="form-group">
-                <x-input-label for="status" :value="'Status'" />
-                <select id="status" name="status" class="form-control" required>
-                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                </select>
+                <x-input-label for="status" :value="'Status (e.g., Available, Sold, Gallery, Private Collection)'" />
+                <x-text-input id="status" name="status" type="text" class="form-control" :value="old('status')" placeholder="Enter current status of the artwork..." />
                 <x-input-error class="mt-2" :messages="$errors->get('status')" />
             </div>
 
@@ -91,9 +88,9 @@
             </div>
 
             <div class="form-group">
-                <x-primary-button class="mr-2">
+                <button type="submit" class="btn btn-default mr-2">
                     Create Archive
-                </x-primary-button>
+                </button>
                 
                 <a href="{{ route('dashboard') }}" class="btn btn-secondary">
                     Cancel

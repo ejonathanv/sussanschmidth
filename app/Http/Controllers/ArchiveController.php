@@ -39,7 +39,7 @@ class ArchiveController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'year' => 'required|integer|min:1900|max:'.date('Y'),
             'height' => 'nullable|integer|min:0',
@@ -68,7 +68,7 @@ class ArchiveController extends Controller
         Archive::create($validated);
 
         return redirect()->route('dashboard')
-            ->with('success', 'Archivo creado exitosamente.');
+            ->with('success', 'The archive has been created successfully.');
     }
 
     public function edit(Archive $archive)
@@ -84,7 +84,7 @@ class ArchiveController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'year' => 'required|integer|min:1900|max:'.date('Y'),
             'height' => 'nullable|integer|min:0',
@@ -117,7 +117,7 @@ class ArchiveController extends Controller
         $archive->update($validated);
 
         return redirect()->route('dashboard')
-            ->with('success', 'Archivo actualizado exitosamente.');
+            ->with('success', 'The archive has been updated successfully.');
     }
 
     public function destroy(Archive $archive)
@@ -130,6 +130,6 @@ class ArchiveController extends Controller
         $archive->delete();
 
         return redirect()->route('dashboard')
-            ->with('success', 'Archivo eliminado exitosamente.');
+            ->with('success', 'The archive has been deleted successfully.');
     }
 }

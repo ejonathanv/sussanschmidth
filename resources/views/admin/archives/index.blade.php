@@ -43,7 +43,7 @@
                     <th>Title</th>
                     <th>Category</th>
                     <th>Year</th>
-                    <th>Status</th>
+                    <th>Current Status</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -69,7 +69,11 @@
                     </td>
                     <td style="vertical-align: middle;">{{ $archive->year }}</td>
                     <td style="vertical-align: middle;">
-                        {{ $archive->status }}
+                        @if($archive->status)
+                            {{ $archive->status }}
+                        @else
+                            <span class="text-muted">No status</span>
+                        @endif
                     </td>
                     <td style="vertical-align: middle;" class="text-right">
                         <a href="{{ route('archives.edit', $archive) }}" style="margin-right: 1rem">
