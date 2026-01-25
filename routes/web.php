@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
@@ -28,9 +28,14 @@ Route::get('/articles/{slug}', [WebsiteController::class, 'article'])->name('art
 // Rutas de administración
 Route::redirect('/auth/login', '/login');
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/', [
-        ArchiveController::class, 'index'
-    ])->name('dashboard');
+    Route::get('/', [ArchiveController::class, 'index'])->name('dashboard');
+
+    // CRUD Archives
+    Route::get('/archives/create', [ArchiveController::class, 'create'])->name('archives.create');
+    Route::post('/archives', [ArchiveController::class, 'store'])->name('archives.store');
+    Route::get('/archives/{archive}/edit', [ArchiveController::class, 'edit'])->name('archives.edit');
+    Route::patch('/archives/{archive}', [ArchiveController::class, 'update'])->name('archives.update');
+    Route::delete('/archives/{archive}', [ArchiveController::class, 'destroy'])->name('archives.destroy');
 });
 
 Route::middleware('auth')->group(function () {
