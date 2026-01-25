@@ -14,6 +14,9 @@
 			@if($archive->status != 'null' && $archive->status != '')
 			<p>{{$archive->status}}</p>
 			@endif
+			@if($archive->digital_info)
+				{!! $archive->digital_info !!}
+			@endif
 		</div>
 		<div class="helper"></div>
 	</div>

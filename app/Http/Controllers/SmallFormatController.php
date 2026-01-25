@@ -33,9 +33,6 @@ class SmallFormatController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request->all());
-
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -43,13 +40,13 @@ class SmallFormatController extends Controller
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',
+            'digital_info' => 'nullable|string|max:2000',
             'location' => 'nullable|string|max:255',
             'year' => 'required|integer|min:1900|max:'.date('Y'),
             'height' => 'nullable|integer|min:0',
             'width' => 'nullable|integer|min:0',
-            'length' => 'nullable|numeric|min:0'
+            'length' => 'nullable|numeric|min:0',
         ]);
-
 
         // Generar slug único
         $slug = Str::slug($request->title);
@@ -60,10 +57,6 @@ class SmallFormatController extends Controller
 
         // Generar smallformatid único
         $validated['smallformatid'] = 'SMF-'.time().'-'.rand(1000, 9999);
-
-        // Procesar booleanos
-        $validated['is_available'] = $request->has('is_available');
-        $validated['is_digital_print'] = $request->has('is_digital_print');
 
         // Procesar imagen si existe
         if ($request->hasFile('image')) {
@@ -94,6 +87,7 @@ class SmallFormatController extends Controller
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',
+            'digital_info' => 'nullable|string|max:2000',
             'location' => 'nullable|string|max:255',
             'year' => 'required|integer|min:1900|max:'.date('Y'),
             'height' => 'nullable|integer|min:0',
@@ -109,10 +103,6 @@ class SmallFormatController extends Controller
             }
             $validated['slug'] = $slug;
         }
-
-        // Procesar booleanos
-        $validated['is_available'] = $request->has('is_available');
-        $validated['is_digital_print'] = $request->has('is_digital_print');
 
         // Procesar nueva imagen si existe
         if ($request->hasFile('image')) {

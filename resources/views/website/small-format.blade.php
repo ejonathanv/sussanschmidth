@@ -15,11 +15,8 @@
 			</div>
 			<p>{{$smallFormat->title}}, {{$smallFormat->year}}. {{$smallFormat->category}}, {{$smallFormat->height}} x {{$smallFormat->width}} cms.</p>
 			
-			@if($smallFormat->is_available)
-				<p>Available</p>
-			@endif
-			@if($smallFormat->is_digital_print)
-				<p>Digital Print on Canvas</p>
+			@if($smallFormat->digital_info)
+				{!! $smallFormat->digital_info !!}
 			@endif
 		</div>
 		<div class="helper"></div>

@@ -19,6 +19,7 @@ class Archive extends Model
         'category',
         'format',
         'status',
+        'digital_info',
         'location',
         'year',
         'height',
@@ -27,4 +28,3 @@ class Archive extends Model
         'length',
     ];
 }
-

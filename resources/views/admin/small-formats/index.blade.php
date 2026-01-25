@@ -36,15 +36,14 @@
             </div>
         </div>
 
-        <table id="archives-table" class="table table-sm table-striped">
+        <table id="small-formats-table" class="table table-sm table-striped">
             <thead>
                 <tr>
                     <th style="width: 70px">Image</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Year</th>
-                    <th>Available</th>
-                    <th>Digital Print</th>
+                    <th>Digital Info</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -70,17 +69,10 @@
                     </td>
                     <td style="vertical-align: middle;">{{ $smallFormat->year }}</td>
                     <td style="vertical-align: middle;">
-                        @if($smallFormat->is_available)
-                            <span class="badge badge-success">Yes</span>
+                        @if($smallFormat->digital_info)
+                            <i class="ion-ios-information-outline text-success" title="Has digital info"></i>
                         @else
-                            <span class="badge badge-secondary">No</span>
-                        @endif
-                    </td>
-                    <td style="vertical-align: middle;">
-                        @if($smallFormat->is_digital_print)
-                            <span class="badge badge-success">Yes</span>
-                        @else
-                            <span class="badge badge-secondary">No</span>
+                            <span class="text-muted">-</span>
                         @endif
                     </td>
                     <td style="vertical-align: middle;" class="text-right">

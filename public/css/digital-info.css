@@ -1,0 +1,72 @@
+/* Digital Information Styles */
+.digital-info {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.digital-info h1, .digital-info h2, .digital-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.digital-info h1 { font-size: 24px; }
+.digital-info h2 { font-size: 20px; }
+.digital-info h3 { font-size: 18px; }
+
+.digital-info p {
+    margin-bottom: 10px;
+}
+
+.digital-info p:last-child {
+    margin-bottom: 0;
+}
+
+.digital-info ul, .digital-info ol {
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+.digital-info ul li, .digital-info ol li {
+    margin-bottom: 5px;
+}
+
+.digital-info a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.digital-info a:hover {
+    text-decoration: underline;
+}
+
+.digital-info strong, .digital-info b {
+    color: #212529;
+}
+
+.digital-info em, .digital-info i {
+    color: #6c757d;
+}
+
+/* CKEditor field styles */
+.ckeditor-field {
+    margin: 15px 0;
+}
+
+.ck-editor__editable {
+    min-height: 150px;
+}
+
+/* Admin table indicator styles */
+.text-success {
+    color: #28a745;
+}
+
+.text-muted {
+    color: #6c757d;
+}

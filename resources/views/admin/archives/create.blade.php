@@ -87,6 +87,8 @@
                 </div>
             </div>
 
+            <x-ckeditor-field name="digital_info" label="Digital Information" help="Add formatted text about digital availability or information" />
+
             <div class="form-group">
                 <button type="submit" class="btn btn-default mr-2">
                     Create Archive

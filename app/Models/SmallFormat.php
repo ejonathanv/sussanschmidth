@@ -25,7 +25,6 @@ class SmallFormat extends Model
         'width',
         'slug',
         'length',
-        'is_available',
-        'is_digital_print',
+        'digital_info',
     ];
 }

@@ -115,26 +115,7 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" id="is_available" name="is_available" class="form-check-input" {{ old('is_available') ? 'checked' : '' }}>
-                            <label for="is_available" class="form-check-label">Available</label>
-                        </div>
-                        <small class="form-text text-muted">Check if this small format is available for purchase/display</small>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" id="is_digital_print" name="is_digital_print" class="form-check-input" {{ old('is_digital_print') ? 'checked' : '' }}>
-                            <label for="is_digital_print" class="form-check-label">Digital Print on Canvas</label>
-                        </div>
-                        <small class="form-text text-muted">Check if this is a digital print on canvas</small>
-                    </div>
-                </div>
-            </div>
+            <x-ckeditor-field name="digital_info" label="Digital Information" help="Add formatted text about digital availability or information" />
 
             <div class="form-group">
                 <button type="submit" class="btn btn-default mr-2">
