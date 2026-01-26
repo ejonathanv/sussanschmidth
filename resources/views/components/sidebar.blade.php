@@ -36,7 +36,23 @@
                 <li><a href="{{ route('small-formats.index') }}">Small Format <i class="ion-ios-briefcase-outline"></i></a></li>
                 <li><a href="{{ route('exhibitions.index') }}">Exhibitions <i class="ion-ios-calendar-outline"></i></a></li>
                 <li><a href="{{ route('articles.index') }}">Articles <i class="ion-ios-paper-outline"></i></a></li>
+                <li><a href="{{ route('social-links.index') }}">Social Links <i class="ion-social-rss-outline"></i></a></li>
             </ul>
+        @endif
+
+        @if($isWebsite)
+            @php
+                $socialLinks = App\Models\SocialLink::activeAndOrdered()->get();
+            @endphp
+            @if($socialLinks->isNotEmpty())
+                <div class="social-links">
+                    @foreach($socialLinks as $link)
+                        <a href="{{ $link->url }}" target="_blank" class="social-link" title="{{ $link->name }}">
+                            <i class="{{ $link->icon }}"></i>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
         @endif
 
         <a href="mailto:absolutelyschmidt@gmail.com" class="sm">Susan Schmidt-Hazen</a>

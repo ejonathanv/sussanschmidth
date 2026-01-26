@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ExhibitionController;
+use App\Http\Controllers\SocialLinkController;
 use App\Http\Controllers\SmallFormatController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -67,6 +68,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
+    // CRUD Social Links
+    Route::get('/social-links', [SocialLinkController::class, 'index'])->name('social-links.index');
+    Route::get('/social-links/create', [SocialLinkController::class, 'create'])->name('social-links.create');
+    Route::post('/social-links', [SocialLinkController::class, 'store'])->name('social-links.store');
+    Route::get('/social-links/{socialLink}/edit', [SocialLinkController::class, 'edit'])->name('social-links.edit');
+    Route::patch('/social-links/{socialLink}', [SocialLinkController::class, 'update'])->name('social-links.update');
+    Route::delete('/social-links/{socialLink}', [SocialLinkController::class, 'destroy'])->name('social-links.destroy');
+    Route::patch('/social-links/{socialLink}/toggle', [SocialLinkController::class, 'toggle'])->name('social-links.toggle');
+    Route::post('/social-links/reorder', [SocialLinkController::class, 'reorder'])->name('social-links.reorder');
 });
 
 Route::middleware('auth')->group(function () {
