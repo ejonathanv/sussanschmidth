@@ -36,14 +36,13 @@
             </div>
         </div>
 
-        <table id="small-formats-table" class="table table-sm table-striped">
+        <table id="archives-table" class="table table-sm table-striped">
             <thead>
                 <tr>
                     <th style="width: 70px">Image</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Year</th>
-                    <th>Digital Info</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -68,13 +67,6 @@
                         {{ $smallFormat->category }}
                     </td>
                     <td style="vertical-align: middle;">{{ $smallFormat->year }}</td>
-                    <td style="vertical-align: middle;">
-                        @if($smallFormat->digital_info)
-                            <i class="ion-ios-information-outline text-success" title="Has digital info"></i>
-                        @else
-                            <span class="text-muted">-</span>
-                        @endif
-                    </td>
                     <td style="vertical-align: middle;" class="text-right">
                         <a href="{{ route('small-formats.edit', $smallFormat) }}" style="margin-right: 1rem">
                             <i class="ion-edit"></i> EDIT
