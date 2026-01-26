@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SmallFormatController;
 use App\Http\Controllers\WebsiteController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExhibitionController;
+use App\Http\Controllers\SmallFormatController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
@@ -49,6 +50,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/small-formats/{smallFormat}/edit', [SmallFormatController::class, 'edit'])->name('small-formats.edit');
     Route::patch('/small-formats/{smallFormat}', [SmallFormatController::class, 'update'])->name('small-formats.update');
     Route::delete('/small-formats/{smallFormat}', [SmallFormatController::class, 'destroy'])->name('small-formats.destroy');
+
+    // CRUD Exhibitions
+    Route::get('/exhibitions', [ExhibitionController::class, 'index'])->name('exhibitions.index');
+    Route::get('/exhibitions/create', [ExhibitionController::class, 'create'])->name('exhibitions.create');
+    Route::post('/exhibitions', [ExhibitionController::class, 'store'])->name('exhibitions.store');
+    Route::get('/exhibitions/{exhibition}/edit', [ExhibitionController::class, 'edit'])->name('exhibitions.edit');
+    Route::patch('/exhibitions/{exhibition}', [ExhibitionController::class, 'update'])->name('exhibitions.update');
+    Route::delete('/exhibitions/{exhibition}', [ExhibitionController::class, 'destroy'])->name('exhibitions.destroy');
 });
 
 Route::middleware('auth')->group(function () {

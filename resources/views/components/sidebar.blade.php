@@ -34,7 +34,7 @@
             <ul>
                 <li><a href="{{ route('dashboard') }}">Archives <i class="ion-ios-folder-outline"></i></a></li>
                 <li><a href="{{ route('small-formats.index') }}">Small Format <i class="ion-ios-briefcase-outline"></i></a></li>
-                <li><a href="#">Exhibitions <i class="ion-ios-calendar-outline"></i></a></li>
+                <li><a href="{{ route('exhibitions.index') }}">Exhibitions <i class="ion-ios-calendar-outline"></i></a></li>
                 <li><a href="#">Articles <i class="ion-ios-paper-outline"></i></a></li>
             </ul>
         @endif

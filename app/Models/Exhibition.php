@@ -20,6 +20,6 @@ class Exhibition extends Model
         'place',
         'location',
         'category',
+        'image',
     ];
 }
-
