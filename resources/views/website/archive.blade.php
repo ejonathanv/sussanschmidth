@@ -22,7 +22,7 @@
 	</div>
 
 	@push('scripts')
-	<script src="{{asset('assets/js/jquery.zoom.js')}}"></script>
+	<script src="{{asset('js/jquery.zoom.js')}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
