@@ -14,7 +14,7 @@
                 <div class="media-left">
                     <a href="{{ route('archive', [$startYear, $endYear, $archive->slug]) }}">
                         @php
-                            $imageUrl = $archive->image ?: 'https://placehold.co/1600x900';
+                            $imageUrl = asset($archive->image) ?: 'https://placehold.co/1600x900';
                         @endphp
                         <figure style="background-image: url('{{ $imageUrl }}')"></figure>
                     </a>
