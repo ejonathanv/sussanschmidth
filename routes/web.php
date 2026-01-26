@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ExhibitionController;
@@ -58,6 +59,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/exhibitions/{exhibition}/edit', [ExhibitionController::class, 'edit'])->name('exhibitions.edit');
     Route::patch('/exhibitions/{exhibition}', [ExhibitionController::class, 'update'])->name('exhibitions.update');
     Route::delete('/exhibitions/{exhibition}', [ExhibitionController::class, 'destroy'])->name('exhibitions.destroy');
+
+    // CRUD Articles
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 });
 
 Route::middleware('auth')->group(function () {
