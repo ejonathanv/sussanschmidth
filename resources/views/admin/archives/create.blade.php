@@ -12,6 +12,17 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger mb-4">
+                <strong>There were some problems with your input:</strong>
+                <ul class="mb-0 mt-2">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('archives.store') }}" enctype="multipart/form-data">
             @csrf
             
