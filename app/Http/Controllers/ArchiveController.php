@@ -36,7 +36,7 @@ class ArchiveController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png',
+            'image' => 'nullable|image',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',
@@ -82,7 +82,7 @@ class ArchiveController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png',
+            'image' => 'nullable|image',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',

@@ -36,7 +36,7 @@ class SmallFormatController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'image' => 'nullable|image',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',
@@ -83,7 +83,7 @@ class SmallFormatController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'image' => 'nullable|image',
             'category' => 'required|string|max:100',
             'format' => 'nullable|string|max:100',
             'status' => 'nullable|string|max:255',
